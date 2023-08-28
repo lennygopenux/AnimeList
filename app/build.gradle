@@ -42,4 +42,6 @@ dependencies {
     // hilt
     implementation "com.google.dagger:hilt-android:2.44"
     annotationProcessor "com.google.dagger:hilt-compiler:2.44"
+    // picasso
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 }
