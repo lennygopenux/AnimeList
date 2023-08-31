@@ -44,4 +44,6 @@ dependencies {
     annotationProcessor "com.google.dagger:hilt-compiler:2.44"
     // picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
+// Lifecycles only (no ViewModel or LiveData)
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 }
