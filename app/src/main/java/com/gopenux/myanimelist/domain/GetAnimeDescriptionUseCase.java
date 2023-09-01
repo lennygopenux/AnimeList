@@ -1,14 +1,14 @@
 package com.gopenux.myanimelist.domain;
 
 import com.gopenux.myanimelist.data.model.AnimeModel;
-import com.gopenux.myanimelist.data.repository.AnimeDescriptionFromProvider;
+import com.gopenux.myanimelist.data.repository.AnimeDescriptionRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GetAnimeDescriptionUseCase {
-    AnimeDescriptionFromProvider animeDescriptionFromProvider =
-            new AnimeDescriptionFromProvider();
+    AnimeDescriptionRepository animeDescriptionFromProvider =
+            new AnimeDescriptionRepository();
     List<AnimeModel> newListAnimeModel =
             new ArrayList<>(
                     animeDescriptionFromProvider.getAnimeDescriptionFromProvider()

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gopenux.myanimelist.R;
 import com.gopenux.myanimelist.databinding.ItemAnimeBinding;
-import com.gopenux.myanimelist.ui.view.VisualizeAnimeSynopsis;
+import com.gopenux.myanimelist.ui.view.animefulldescription.VisualizeAnimeSynopsis;
 import com.squareup.picasso.Picasso;
 
 public class AnimeDescriptionViewHolder extends RecyclerView.ViewHolder {
@@ -30,7 +30,7 @@ public class AnimeDescriptionViewHolder extends RecyclerView.ViewHolder {
         this.textViewAnimeName = bindingAnime.tvAnimeName;
         this.textViewAnimeSynopsis = bindingAnime.tvAnimeSynopsisInvisible;
         this.uriAnimeImage = Uri.EMPTY;
-        this.animeSynopsis = "";
+        this.animeSynopsis = toString();
     }
 
     protected String bindAnimeDescriptionImage(Uri uriImageAnime) {
@@ -46,9 +46,8 @@ public class AnimeDescriptionViewHolder extends RecyclerView.ViewHolder {
         return uriImageAnime.toString();
     }
 
-    protected void bindAnimeTitle(String titleAnime) {
-        this.animeSynopsis = titleAnime;
-        textViewAnimeName.setText(titleAnime);
+    protected void bindAnimeTitle(String animeName) {
+        textViewAnimeName.setText(animeName);
     }
 
     protected String bindAnimeSynopsis(String animeSynopsis){

@@ -1,4 +1,4 @@
-package com.gopenux.myanimelist.ui.view;
+package com.gopenux.myanimelist.ui.view.animepartialdescription;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -8,11 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.gopenux.myanimelist.data.model.AnimeModel;
-import com.gopenux.myanimelist.data.provider.AnimeListProvider;
-import com.gopenux.myanimelist.data.repository.AnimeDescriptionFromProvider;
 import com.gopenux.myanimelist.domain.GetAnimeDescriptionUseCase;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -20,8 +17,7 @@ import javax.inject.Inject;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 
 @HiltViewModel
-public class ViewModelAnimeDescription extends ViewModel {
-
+public class ViewModelAnimePartialDescription extends ViewModel {
 
     @SuppressLint("StaticFieldLeak")
     private final Activity activity = new Activity();
@@ -39,7 +35,7 @@ public class ViewModelAnimeDescription extends ViewModel {
     public MutableLiveData<Integer> hideShowAnimeList;
 
     @Inject
-    public ViewModelAnimeDescription(
+    public ViewModelAnimePartialDescription(
     ) {
         this.animeList = new MutableLiveData<>();
         this.numberItemsAnimeList = new MutableLiveData<>();
@@ -79,8 +75,10 @@ public class ViewModelAnimeDescription extends ViewModel {
     }
 
     public void updateAnimeList() {
+
         updateAnimeList.setValue(View.INVISIBLE);
         isLoadingAnimeList.setValue(View.VISIBLE);
+
         Thread threadHideShowAnimeList = new Thread() {
             @SuppressLint("SetTextI18n")
             @Override

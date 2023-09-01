@@ -20,10 +20,10 @@
             android:layout_height="300dp"
             android:layout_marginBottom="5dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Anime image"
             android:clickable="true"
-            android:scaleType="centerCrop"
-            android:focusable="true" />
+            android:scaleType="fitXY"
+            android:focusable="true"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tvAnimeName"
@@ -32,8 +32,7 @@
             android:layout_margin="5dp"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:textStyle="bold|italic"
-            tools:text="Anime" />
+            android:textStyle="bold|italic" />
 
         <TextView
             android:id="@+id/tvAnimeSynopsisInvisible"
@@ -43,7 +42,6 @@
             android:textColor="@color/black"
             android:visibility="invisible"
             android:textSize="20sp"
-            android:textStyle="bold|italic"
-            tools:text="Synopsis description" />
+            android:textStyle="bold|italic" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -36,18 +36,23 @@ public class AnimeDescriptionAdapter extends RecyclerView.Adapter<AnimeDescripti
         holder.navigateSynopsisAnimeScreen(context);
 
         holder.bindAnimeDescriptionImage(
-                getAnimeDescriptionUseCase.getAnimeDescription().get(position).getAnimeImage());
+                getAnimeDescriptionUseCase.getAnimeDescription()
+                        .get(position).getAnimeImage()
+        );
 
         holder.bindAnimeTitle(
-                getAnimeDescriptionUseCase.getAnimeDescription().get(position).getAnimeName());
+                getAnimeDescriptionUseCase.getAnimeDescription()
+                        .get(position).getAnimeName()
+        );
 
         holder.bindAnimeSynopsis(
-                getAnimeDescriptionUseCase.getAnimeDescription().get(position).getAnimeSynopsis()
+                getAnimeDescriptionUseCase.getAnimeDescription()
+                        .get(position).getAnimeSynopsis()
         );
     }
 
     @Override
     public int getItemCount() {
-        return this.getAnimeDescriptionUseCase.getAnimeDescription().size();
+        return getAnimeDescriptionUseCase.getAnimeDescription().size();
     }
 }

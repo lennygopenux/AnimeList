@@ -1,4 +1,4 @@
-package com.gopenux.myanimelist.ui.view;
+package com.gopenux.myanimelist.ui.view.animepartialdescription;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
     AnimeDescriptionAdapter animeDescriptionAdapter;
-    ViewModelAnimeDescription viewModelAnimeDescription;
+    ViewModelAnimePartialDescription viewModelAnimePartialDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,50 +27,44 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-
         initViewModelAnimeDescription();
         initRecyclerViewAnimeList();
         updateAnimeList();
     }
 
+    private void initViewModelAnimeDescription() {
+        viewModelAnimePartialDescription =
+                new ViewModelProvider(this)
+                        .get(ViewModelAnimePartialDescription.class);
+    }
     @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
     public void initRecyclerViewAnimeList() {
-        animeDescriptionAdapter =
-                new AnimeDescriptionAdapter();
+        animeDescriptionAdapter = new AnimeDescriptionAdapter();
 
-        viewModelAnimeDescription.hideShowAnimeList
+        viewModelAnimePartialDescription.hideShowAnimeList
                 .observeForever(hideShowAnimeList
                         -> binding.rvAnimeList.setVisibility(hideShowAnimeList));
 
+        binding.rvAnimeList.setLayoutManager(
+                new LinearLayoutManager(this)
+        );
         binding.rvAnimeList.setHasFixedSize(true);
-
         binding.rvAnimeList.setAdapter(animeDescriptionAdapter);
         animeDescriptionAdapter.notifyDataSetChanged();
 
-        binding.rvAnimeList.setLayoutManager(
-                new LinearLayoutManager(this));
-
-        viewModelAnimeDescription.showRecyclerViewAnimeList();
-
-        viewModelAnimeDescription.isLoadingAnimeList
+        viewModelAnimePartialDescription.showRecyclerViewAnimeList();
+        viewModelAnimePartialDescription.isLoadingAnimeList
                 .observeForever(aBoolean -> binding.pbIsLoading.setVisibility(aBoolean));
-
-        viewModelAnimeDescription.numberItemsAnimeList
+        viewModelAnimePartialDescription.numberItemsAnimeList
                 .observeForever(numberItemsAnimeList
                         -> binding.tvNumberItems.setText(numberItemsAnimeList.toString()));
     }
 
-    private void initViewModelAnimeDescription() {
-        viewModelAnimeDescription =
-                new ViewModelProvider(this)
-                        .get(ViewModelAnimeDescription.class);
-    }
-
     private void updateAnimeList() {
         binding.ibUpdateMainActivity.setOnClickListener(
-                view -> viewModelAnimeDescription.updateAnimeList());
+                view -> viewModelAnimePartialDescription.updateAnimeList());
 
-        viewModelAnimeDescription.updateAnimeList.
+        viewModelAnimePartialDescription.updateAnimeList.
                 observeForever(updateAnimeList ->
                         binding.rvAnimeList.setVisibility(updateAnimeList));
     }

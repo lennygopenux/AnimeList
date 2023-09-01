@@ -4,17 +4,14 @@ import android.net.Uri;
 
 public class AnimeModel {
 
-    private String animeName;
-    private String animeSynopsis;
-    private Uri animeImage;
+    private final String animeName;
+    private final String animeSynopsis;
+    private final Uri animeImage;
 
     public AnimeModel(String animeName, String animeSynopsis, Uri animeImage) {
         this.animeName = animeName;
         this.animeSynopsis = animeSynopsis;
         this.animeImage = animeImage;
-    }
-
-    public AnimeModel() {
     }
 
     public String getAnimeName() {

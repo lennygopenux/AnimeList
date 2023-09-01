@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">MyAnimeList</string>
+    <string name="app_name">My Anime List</string>
+    <!---Strings activity_main-->
+    <string name="anime_numbers">Número de animes</string>
+    <string name="anime_description">Botón para actualizar la vista principal</string>
 </resources>
