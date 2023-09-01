@@ -25,14 +25,8 @@ public class ViewModelAnimeDescription extends ViewModel {
 
     @SuppressLint("StaticFieldLeak")
     private final Activity activity = new Activity();
-    private final ArrayList<AnimeModel> animeModel =
-            new ArrayList<>();
-    private final AnimeListProvider animeListProvider =
-            new AnimeListProvider(animeModel);
-    private final AnimeDescriptionFromProvider animeDescriptionFromProvider =
-            new AnimeDescriptionFromProvider(animeListProvider);
     private final GetAnimeDescriptionUseCase getAnimeDescriptionUseCase =
-            new GetAnimeDescriptionUseCase(animeDescriptionFromProvider);
+            new GetAnimeDescriptionUseCase();
 
     public MutableLiveData<List<AnimeModel>> animeList;
 

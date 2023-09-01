@@ -8,25 +8,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gopenux.myanimelist.R;
-import com.gopenux.myanimelist.data.model.AnimeModel;
-import com.gopenux.myanimelist.data.provider.AnimeListProvider;
-import com.gopenux.myanimelist.data.repository.AnimeDescriptionFromProvider;
 import com.gopenux.myanimelist.domain.GetAnimeDescriptionUseCase;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AnimeDescriptionAdapter extends RecyclerView.Adapter<AnimeDescriptionViewHolder> {
 
     private Context context;
-    private final List<AnimeModel> animeModel = new ArrayList<>();
-
-    private final AnimeListProvider animeListProvider = new AnimeListProvider(animeModel);
-    private final AnimeDescriptionFromProvider animeDescriptionFromProvider =
-            new AnimeDescriptionFromProvider(animeListProvider);
 
     private final GetAnimeDescriptionUseCase getAnimeDescriptionUseCase =
-            new GetAnimeDescriptionUseCase(animeDescriptionFromProvider);
+            new GetAnimeDescriptionUseCase();
 
     @NonNull
     @Override
@@ -47,10 +36,10 @@ public class AnimeDescriptionAdapter extends RecyclerView.Adapter<AnimeDescripti
         holder.navigateSynopsisAnimeScreen(context);
 
         holder.bindAnimeDescriptionImage(
-                    getAnimeDescriptionUseCase.getAnimeDescription().get(position).getAnimeImage());
+                getAnimeDescriptionUseCase.getAnimeDescription().get(position).getAnimeImage());
 
         holder.bindAnimeTitle(
-                    getAnimeDescriptionUseCase.getAnimeDescription().get(position).getAnimeName());
+                getAnimeDescriptionUseCase.getAnimeDescription().get(position).getAnimeName());
 
         holder.bindAnimeSynopsis(
                 getAnimeDescriptionUseCase.getAnimeDescription().get(position).getAnimeSynopsis()

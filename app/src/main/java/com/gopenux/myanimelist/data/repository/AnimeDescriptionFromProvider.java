@@ -3,17 +3,17 @@ package com.gopenux.myanimelist.data.repository;
 import com.gopenux.myanimelist.data.model.AnimeModel;
 import com.gopenux.myanimelist.data.provider.AnimeListProvider;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AnimeDescriptionFromProvider {
-    private final AnimeListProvider animeListProvider;
+    private final AnimeListProvider animeListProvider = new AnimeListProvider();
 
-    public AnimeDescriptionFromProvider(AnimeListProvider animeListProvider) {
-        this.animeListProvider = animeListProvider;
-    }
-
+    List<AnimeModel> newListAnimeModel =
+            new ArrayList<>(
+                    animeListProvider.getAnimeList()
+            );
     public List<AnimeModel> getAnimeDescriptionFromProvider() {
-        //this.animeListProvider.getAnimeList().clear();
-        return this.animeListProvider.getAnimeList();
+        return newListAnimeModel;
     }
 }

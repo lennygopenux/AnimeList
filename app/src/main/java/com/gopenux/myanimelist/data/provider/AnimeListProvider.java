@@ -4,15 +4,12 @@ import android.net.Uri;
 
 import com.gopenux.myanimelist.data.model.AnimeModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AnimeListProvider {
 
-    private final List<AnimeModel> animeList;
-
-    public AnimeListProvider(List<AnimeModel> animeList) {
-        this.animeList = animeList;
-    }
+    private final List<AnimeModel> animeList = new ArrayList<>();
 
     public List<AnimeModel> getAnimeList() {
         animeList.add(0,
