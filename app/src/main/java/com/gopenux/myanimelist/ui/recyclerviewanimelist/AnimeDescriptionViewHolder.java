@@ -49,7 +49,7 @@ public class AnimeDescriptionViewHolder extends RecyclerView.ViewHolder {
                 .into(imageAnime);
     }
 
-    protected String bindGetAnimeDescriptionImage(){
+    protected String getBindAnimeDescriptionImage(){
         return this.uriAnimeImage.toString();
     }
 
@@ -71,7 +71,7 @@ public class AnimeDescriptionViewHolder extends RecyclerView.ViewHolder {
     protected void navigateSynopsisAnimeScreen(Context context) {
         imageAnime.setOnClickListener(v -> {
             Intent intent = new Intent(context, VisualizeAnimeSynopsis.class);
-            intent.putExtra("animeImage", bindGetAnimeDescriptionImage());
+            intent.putExtra("animeImage", getBindAnimeDescriptionImage());
             intent.putExtra("animeName", getBindAnimeTitle());
             intent.putExtra("animeSynopsis", getBindAnimeSynopsis());
             context.startActivity(intent);
