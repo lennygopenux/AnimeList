@@ -3,6 +3,7 @@ package com.gopenux.myanimelist.ui.recyclerviewanimelist;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gopenux.myanimelist.R;
+import com.gopenux.myanimelist.databinding.ActivityVisualizeAnimeSynopsisBinding;
 import com.gopenux.myanimelist.databinding.ItemAnimeBinding;
 import com.gopenux.myanimelist.ui.view.animefulldescription.VisualizeAnimeSynopsis;
 import com.squareup.picasso.Picasso;
@@ -18,17 +20,20 @@ import com.squareup.picasso.Picasso;
 public class AnimeDescriptionViewHolder extends RecyclerView.ViewHolder {
 
     protected final ItemAnimeBinding bindingAnime = ItemAnimeBinding.bind(itemView);
+    protected ActivityVisualizeAnimeSynopsisBinding visualizeAnimeSynopsisBinding;
     protected ImageView imageAnime;
     protected TextView textViewAnimeName;
-    protected TextView textViewAnimeSynopsis;
     protected String animeSynopsis;
     protected Uri uriAnimeImage;
 
     public AnimeDescriptionViewHolder(@NonNull View itemView) {
         super(itemView);
+        visualizeAnimeSynopsisBinding =
+                ActivityVisualizeAnimeSynopsisBinding
+                        .inflate(LayoutInflater
+                                .from(itemView.getContext()));
         this.imageAnime = bindingAnime.ivAnime;
         this.textViewAnimeName = bindingAnime.tvAnimeName;
-        this.textViewAnimeSynopsis = bindingAnime.tvAnimeSynopsisInvisible;
         this.uriAnimeImage = Uri.EMPTY;
         this.animeSynopsis = toString();
     }
@@ -52,7 +57,7 @@ public class AnimeDescriptionViewHolder extends RecyclerView.ViewHolder {
 
     protected String bindAnimeSynopsis(String animeSynopsis){
         this.animeSynopsis = animeSynopsis;
-        textViewAnimeSynopsis.setText(animeSynopsis);
+        visualizeAnimeSynopsisBinding.tvAnimeSynopsis.setText(animeSynopsis);
         return animeSynopsis;
     }
 

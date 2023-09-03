@@ -28,8 +28,7 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:layout_marginBottom="16dp"
-        tools:text="0" />
+        android:layout_marginBottom="16dp" />
 
     <ImageButton
         android:id="@+id/ibUpdateMainActivity"
@@ -63,6 +62,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-         />
+        android:layout_marginEnd="16dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

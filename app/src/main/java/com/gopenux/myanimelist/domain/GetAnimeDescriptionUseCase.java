@@ -7,11 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GetAnimeDescriptionUseCase {
-    AnimeDescriptionRepository animeDescriptionFromProvider =
-            new AnimeDescriptionRepository();
+    AnimeDescriptionRepository animeDescriptionRepository = new AnimeDescriptionRepository();
     List<AnimeModel> newListAnimeModel =
             new ArrayList<>(
-                    animeDescriptionFromProvider.getAnimeDescriptionFromProvider()
+                    animeDescriptionRepository.getAnimeDescriptionFromProvider()
             );
 
     public List<AnimeModel> getAnimeDescription() {

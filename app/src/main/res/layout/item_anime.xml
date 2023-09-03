@@ -33,15 +33,5 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold|italic" />
-
-        <TextView
-            android:id="@+id/tvAnimeSynopsisInvisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:textColor="@color/black"
-            android:visibility="invisible"
-            android:textSize="20sp"
-            android:textStyle="bold|italic" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
