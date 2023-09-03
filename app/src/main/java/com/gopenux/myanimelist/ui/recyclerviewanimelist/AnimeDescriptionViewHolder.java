@@ -38,8 +38,8 @@ public class AnimeDescriptionViewHolder extends RecyclerView.ViewHolder {
         this.animeSynopsis = toString();
     }
 
-    protected String bindAnimeDescriptionImage(Uri uriImageAnime) {
-       this.uriAnimeImage = uriImageAnime;
+    protected void setBindAnimeDescriptionImage(Uri uriImageAnime) {
+        this.uriAnimeImage = uriImageAnime;
 
         Picasso.with(itemView.getContext())
                 .load(uriImageAnime)
@@ -47,26 +47,33 @@ public class AnimeDescriptionViewHolder extends RecyclerView.ViewHolder {
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .error(R.drawable.ic_launcher_foreground)
                 .into(imageAnime);
-
-        return uriImageAnime.toString();
     }
 
-    protected void bindAnimeTitle(String animeName) {
+    protected String bindGetAnimeDescriptionImage(){
+        return this.uriAnimeImage.toString();
+    }
+
+    protected void setBindAnimeTitle(String animeName) {
         textViewAnimeName.setText(animeName);
     }
 
-    protected String bindAnimeSynopsis(String animeSynopsis){
-        this.animeSynopsis = animeSynopsis;
-        visualizeAnimeSynopsisBinding.tvAnimeSynopsis.setText(animeSynopsis);
-        return animeSynopsis;
+    protected String getBindAnimeTitle(){
+        return textViewAnimeName.getText().toString();
     }
 
+    protected void setBindAnimeSynopsis(String animeSynopsis) {
+        visualizeAnimeSynopsisBinding.tvAnimeSynopsis.setText(animeSynopsis);
+    }
+
+    protected String getBindAnimeSynopsis(){
+        return visualizeAnimeSynopsisBinding.tvAnimeSynopsis.getText().toString();
+    }
     protected void navigateSynopsisAnimeScreen(Context context) {
         imageAnime.setOnClickListener(v -> {
             Intent intent = new Intent(context, VisualizeAnimeSynopsis.class);
-            intent.putExtra("animeImage", bindAnimeDescriptionImage(uriAnimeImage));
-            intent.putExtra("animeName", textViewAnimeName.getText().toString());
-            intent.putExtra("animeSynopsis", bindAnimeSynopsis(animeSynopsis));
+            intent.putExtra("animeImage", bindGetAnimeDescriptionImage());
+            intent.putExtra("animeName", getBindAnimeTitle());
+            intent.putExtra("animeSynopsis", getBindAnimeSynopsis());
             context.startActivity(intent);
         });
     }

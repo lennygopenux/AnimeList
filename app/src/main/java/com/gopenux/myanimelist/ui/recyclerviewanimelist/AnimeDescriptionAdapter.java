@@ -35,17 +35,17 @@ public class AnimeDescriptionAdapter extends RecyclerView.Adapter<AnimeDescripti
 
         holder.navigateSynopsisAnimeScreen(context);
 
-        holder.bindAnimeDescriptionImage(
+        holder.setBindAnimeDescriptionImage(
                 getAnimeDescriptionUseCase.getAnimeDescription()
                         .get(position).getAnimeImage()
         );
 
-        holder.bindAnimeTitle(
+        holder.setBindAnimeTitle(
                 getAnimeDescriptionUseCase.getAnimeDescription()
                         .get(position).getAnimeName()
         );
 
-        holder.bindAnimeSynopsis(
+        holder.setBindAnimeSynopsis(
                 getAnimeDescriptionUseCase.getAnimeDescription()
                         .get(position).getAnimeSynopsis()
         );
