@@ -17,7 +17,10 @@ import com.gopenux.myanimelist.databinding.ItemAnimeBinding;
 import com.gopenux.myanimelist.ui.view.animefulldescription.VisualizeAnimeSynopsis;
 import com.squareup.picasso.Picasso;
 
-public class AnimeDescriptionViewHolder extends RecyclerView.ViewHolder {
+import java.util.HashMap;
+import java.util.Map;
+
+public class AnimeDescriptionViewHolder extends RecyclerView.ViewHolder implements IAnimeDescriptionViewHolder {
 
     protected final ItemAnimeBinding bindingAnime = ItemAnimeBinding.bind(itemView);
     protected ActivityVisualizeAnimeSynopsisBinding visualizeAnimeSynopsisBinding;
@@ -25,6 +28,8 @@ public class AnimeDescriptionViewHolder extends RecyclerView.ViewHolder {
     protected TextView textViewAnimeName;
     protected String animeSynopsis;
     protected Uri uriAnimeImage;
+
+    Map<String, String> mapIntentAnimeDescription = new HashMap<>();
 
     public AnimeDescriptionViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -38,7 +43,8 @@ public class AnimeDescriptionViewHolder extends RecyclerView.ViewHolder {
         this.animeSynopsis = toString();
     }
 
-    protected void setBindAnimeDescriptionImage(Uri uriImageAnime) {
+    @Override
+    public void setBindAnimeDescriptionImage(Uri uriImageAnime) {
         this.uriAnimeImage = uriImageAnime;
 
         Picasso.with(itemView.getContext())
@@ -49,32 +55,40 @@ public class AnimeDescriptionViewHolder extends RecyclerView.ViewHolder {
                 .into(imageAnime);
     }
 
-    protected String getBindAnimeDescriptionImage(){
-        return this.uriAnimeImage.toString();
-    }
-
-    protected void setBindAnimeTitle(String animeName) {
+    @Override
+    public void setBindAnimeTitle(String animeName) {
         textViewAnimeName.setText(animeName);
     }
 
-    protected String getBindAnimeTitle(){
-        return textViewAnimeName.getText().toString();
-    }
-
-    protected void setBindAnimeSynopsis(String animeSynopsis) {
+    @Override
+    public void setBindAnimeSynopsis(String animeSynopsis) {
         visualizeAnimeSynopsisBinding.tvAnimeSynopsis.setText(animeSynopsis);
     }
 
-    protected String getBindAnimeSynopsis(){
-        return visualizeAnimeSynopsisBinding.tvAnimeSynopsis.getText().toString();
-    }
-    protected void navigateSynopsisAnimeScreen(Context context) {
+    @Override
+    public void navigateSynopsisAnimeScreen(Context context) {
+
         imageAnime.setOnClickListener(v -> {
             Intent intent = new Intent(context, VisualizeAnimeSynopsis.class);
-            intent.putExtra("animeImage", getBindAnimeDescriptionImage());
-            intent.putExtra("animeName", getBindAnimeTitle());
-            intent.putExtra("animeSynopsis", getBindAnimeSynopsis());
+
+            for (Map.Entry<String, String> animeFullDescription : mapAnimeDescriptionData().entrySet()) {
+                intent.putExtra(animeFullDescription.getKey(), animeFullDescription.getValue());
+            }
+
             context.startActivity(intent);
         });
+    }
+
+    private Map<String, String> mapAnimeDescriptionData() {
+
+        mapIntentAnimeDescription.
+                put("animeImage", uriAnimeImage.toString());
+        mapIntentAnimeDescription.
+                put("animeName", textViewAnimeName.getText().toString());
+        mapIntentAnimeDescription.
+                put("animeSynopsis", visualizeAnimeSynopsisBinding.tvAnimeSynopsis
+                        .getText().toString());
+
+        return mapIntentAnimeDescription;
     }
 }
