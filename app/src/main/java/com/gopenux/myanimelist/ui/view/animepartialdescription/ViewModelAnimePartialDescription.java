@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.View;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -12,11 +13,6 @@ import com.gopenux.myanimelist.domain.GetAnimeDescriptionUseCase;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
-import dagger.hilt.android.lifecycle.HiltViewModel;
-
-@HiltViewModel
 public class ViewModelAnimePartialDescription extends ViewModel {
 
     @SuppressLint("StaticFieldLeak")
@@ -24,49 +20,45 @@ public class ViewModelAnimePartialDescription extends ViewModel {
     private final GetAnimeDescriptionUseCase getAnimeDescriptionUseCase =
             new GetAnimeDescriptionUseCase();
 
-    public MutableLiveData<List<AnimeModel>> animeList;
+    private final MutableLiveData<List<AnimeModel>> _animeList = new MutableLiveData<>();
+    public LiveData<List<AnimeModel>> animeList = _animeList;
 
-    public MutableLiveData<Integer> numberItemsAnimeList;
+    private final MutableLiveData<Integer> _numberItemsAnimeList = new MutableLiveData<>();
+    public LiveData<Integer> numberItemsAnimeList = _numberItemsAnimeList;
 
-    public MutableLiveData<Integer> isLoadingAnimeList;
+    private final MutableLiveData<Integer> _isLoadingAnimeList = new MutableLiveData<>();
+    public LiveData<Integer> isLoadingAnimeList = _isLoadingAnimeList;
 
-    public MutableLiveData<Integer> updateAnimeList;
+    private final MutableLiveData<Integer> _updateAnimeList = new MutableLiveData<>();
 
-    public MutableLiveData<Integer> hideShowAnimeList;
+    public LiveData<Integer> updateAnimeList = _updateAnimeList;
 
-    @Inject
-    public ViewModelAnimePartialDescription(
-    ) {
-        this.animeList = new MutableLiveData<>();
-        this.numberItemsAnimeList = new MutableLiveData<>();
-        this.isLoadingAnimeList = new MutableLiveData<>();
-        this.updateAnimeList = new MutableLiveData<>();
-        this.hideShowAnimeList = new MutableLiveData<>();
-    }
+    private final MutableLiveData<Integer> _hideShowAnimeList = new MutableLiveData<>();
+    public MutableLiveData<Integer>  hideShowAnimeList = _hideShowAnimeList;
 
     @SuppressLint("NotifyDataSetChanged")
     public void showRecyclerViewAnimeList() {
 
-        isLoadingAnimeList.setValue(View.VISIBLE);
-        hideShowAnimeList.setValue(View.INVISIBLE);
-        numberItemsAnimeList.setValue(0);
+        _isLoadingAnimeList.setValue(View.VISIBLE);
+        _hideShowAnimeList.setValue(View.INVISIBLE);
+        _numberItemsAnimeList.setValue(0);
 
-        Thread threadShowRecyclerViewAnimeList = new Thread(){
+        Thread threadShowRecyclerViewAnimeList = new Thread() {
             @Override
-            public void run(){
-                try{
+            public void run() {
+                try {
                     Thread.sleep(3000);
-                }catch (InterruptedException e){
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
                 activity.runOnUiThread(() -> {
                     if (!getAnimeDescriptionUseCase.getAnimeDescription().isEmpty()) {
-                        isLoadingAnimeList.setValue(View.INVISIBLE);
-                        numberItemsAnimeList.setValue(
+                        _isLoadingAnimeList.setValue(View.INVISIBLE);
+                        _numberItemsAnimeList.setValue(
                                 getAnimeDescriptionUseCase.getAnimeDescription().size()
                         );
-                        hideShowAnimeList.setValue(View.VISIBLE);
+                        _hideShowAnimeList.setValue(View.VISIBLE);
                     }
                 });
             }
@@ -76,8 +68,8 @@ public class ViewModelAnimePartialDescription extends ViewModel {
 
     public void updateAnimeList() {
 
-        updateAnimeList.setValue(View.INVISIBLE);
-        isLoadingAnimeList.setValue(View.VISIBLE);
+        _updateAnimeList.setValue(View.INVISIBLE);
+        _isLoadingAnimeList.setValue(View.VISIBLE);
 
         Thread threadHideShowAnimeList = new Thread() {
             @SuppressLint("SetTextI18n")
@@ -90,8 +82,8 @@ public class ViewModelAnimePartialDescription extends ViewModel {
                 }
 
                 activity.runOnUiThread(() -> {
-                    updateAnimeList.setValue(View.VISIBLE);
-                    isLoadingAnimeList.setValue(View.INVISIBLE);
+                    _updateAnimeList.setValue(View.VISIBLE);
+                    _isLoadingAnimeList.setValue(View.INVISIBLE);
                 });
             }
         };
