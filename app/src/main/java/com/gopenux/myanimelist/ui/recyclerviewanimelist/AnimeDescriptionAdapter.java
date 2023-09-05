@@ -8,14 +8,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gopenux.myanimelist.R;
+import com.gopenux.myanimelist.data.provider.AnimeListProvider;
+import com.gopenux.myanimelist.data.provider.IAnimeListProvider;
+import com.gopenux.myanimelist.data.repository.AnimeDescriptionRepository;
 import com.gopenux.myanimelist.domain.GetAnimeDescriptionUseCase;
 
 public class AnimeDescriptionAdapter extends RecyclerView.Adapter<AnimeDescriptionViewHolder> {
 
     private Context context;
 
+    private final IAnimeListProvider animeListProvider = new AnimeListProvider();
+    private final AnimeDescriptionRepository animeDescriptionRepository =
+            new AnimeDescriptionRepository(animeListProvider);
+
     private final GetAnimeDescriptionUseCase getAnimeDescriptionUseCase =
-            new GetAnimeDescriptionUseCase();
+            new GetAnimeDescriptionUseCase(animeDescriptionRepository);
 
     @NonNull
     @Override

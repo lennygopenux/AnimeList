@@ -7,7 +7,7 @@ import com.gopenux.myanimelist.data.model.AnimeModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnimeListProvider {
+public class AnimeListProvider implements IAnimeListProvider{
 
     private final List<AnimeModel> animeList = new ArrayList<>();
 

@@ -29,7 +29,7 @@ public class AnimeDescriptionViewHolder extends RecyclerView.ViewHolder implemen
     protected String animeSynopsis;
     protected Uri uriAnimeImage;
 
-    Map<String, String> mapIntentAnimeDescription = new HashMap<>();
+    private final Map<String, String> mapIntentAnimeDescription = new HashMap<>();
 
     public AnimeDescriptionViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -65,6 +65,8 @@ public class AnimeDescriptionViewHolder extends RecyclerView.ViewHolder implemen
         visualizeAnimeSynopsisBinding.tvAnimeSynopsis.setText(animeSynopsis);
     }
 
+    //TODO: El método y función siguientes deben estar en otra clase para cumplir con el
+    // principio de single responsability
     @Override
     public void navigateSynopsisAnimeScreen(Context context) {
 
